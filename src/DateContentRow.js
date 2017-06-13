@@ -41,6 +41,8 @@ const propTypes = {
   eventWrapperComponent: elementType.isRequired,
   minRows: PropTypes.number.isRequired,
   maxRows: PropTypes.number.isRequired,
+
+  dayPropGetter: PropTypes.func,
 };
 
 const defaultProps = {
@@ -152,6 +154,7 @@ class DateContentRow extends React.Component {
       eventWrapperComponent,
       onSelectStart,
       onSelectEnd,
+      dayPropGetter,
       ...props
     } = this.props;
 
@@ -180,6 +183,7 @@ class DateContentRow extends React.Component {
           onSelectSlot={this.handleSelectSlot}
           cellWrapperComponent={dateCellWrapper}
           cellInnerComponent={dateCellInner}
+          dayPropGetter={dayPropGetter}
         />
 
         <div className='rbc-row-content'>

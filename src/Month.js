@@ -72,6 +72,8 @@ let propTypes = {
       y: PropTypes.number,
     }),
   ]),
+
+  dayPropGetter: PropTypes.func,
 }
 
 class MonthView extends React.Component {
@@ -157,6 +159,7 @@ class MonthView extends React.Component {
       messages,
       selected,
       now,
+      dayPropGetter,
     } = this.props
 
     const { needLimitMeasure, rowLimit } = this.state
@@ -191,6 +194,7 @@ class MonthView extends React.Component {
         eventWrapperComponent={components.eventWrapper}
         dateCellWrapper={components.dateCellWrapper}
         dateCellInner={components.dateCellInner}
+        dayPropGetter={dayPropGetter}
       />
     )
   }

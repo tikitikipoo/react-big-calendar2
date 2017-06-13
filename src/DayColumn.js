@@ -57,6 +57,8 @@ class DaySlot extends React.Component {
     dayWrapperComponent: elementType,
     eventComponent: elementType,
     eventWrapperComponent: elementType.isRequired,
+
+    dayPropGetter: PropTypes.func,
   };
 
   static defaultProps = { dragThroughEvents: true };
@@ -86,6 +88,7 @@ class DaySlot extends React.Component {
       now,
       selectRangeFormat,
       culture,
+      dayPropGetter,
       ...props
     } = this.props
 
@@ -99,11 +102,28 @@ class DaySlot extends React.Component {
       end: this.state.endDate
     };
 
+    let dStyle = undefined
+    let dClassName = undefined
+
+    if (dayPropGetter) {
+      const dayProps = dayPropGetter(max, dates.isToday(max));
+      if (dayProps && dayProps.style)
+        dStyle = dayProps.style;
+
+      if (dayProps && dayProps.className)
+        dClassName = dayProps.className;
+    }
+
     return (
       <TimeColumn
         {...props}
+        style={{
+          ...dStyle,
+          ...props.style
+        }}
         className={cn(
           'rbc-day-slot',
+          dClassName,
           dates.isToday(max) && 'rbc-today'
         )}
         now={now}

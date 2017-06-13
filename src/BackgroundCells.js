@@ -28,6 +28,8 @@ class BackgroundCells extends React.Component {
     ),
     rtl: PropTypes.bool,
     type: PropTypes.string,
+
+    dayPropGetter: PropTypes.func,
   }
 
   constructor(props, context) {
@@ -56,13 +58,23 @@ class BackgroundCells extends React.Component {
   }
 
   render(){
-    let { range, cellWrapperComponent: Wrapper, cellInnerComponent: Inner } = this.props;
+    let { range, cellWrapperComponent: Wrapper, cellInnerComponent: Inner, dayPropGetter } = this.props;
     let { selecting, startIdx, endIdx } = this.state;
 
     return (
       <div className='rbc-row-bg'>
         {range.map((date, index) => {
           let selected =  selecting && index >= startIdx && index <= endIdx;
+          let dStyle = undefined;
+          let dClassName = undefined;
+          if (dayPropGetter) {
+            const dayProps = dayPropGetter(date, dates.isToday(date));
+            if (dayProps && dayProps.style)
+              dStyle = dayProps.style;
+
+            if (dayProps && dayProps.className)
+              dClassName = dayProps.className;
+          }
           return (
             <Wrapper
               key={index}
@@ -70,9 +82,13 @@ class BackgroundCells extends React.Component {
               range={range}
             >
               <div
-                style={segStyle(1, range.length)}
+                style={{
+                  ...dStyle,
+                  ...segStyle(1, range.length)
+                }}
                 className={cn(
                   'rbc-day-bg',
+                  dClassName,
                   selected && 'rbc-selected-cell',
                   dates.isToday(date) && 'rbc-today',
                 )}

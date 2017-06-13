@@ -2,6 +2,8 @@ import React from 'react';
 import BigCalendar from 'react-big-calendar';
 import events from '../events';
 
+const rDay = '0,2'
+
 let allViews = Object.keys(BigCalendar.views).map(k => BigCalendar.views[k])
 
 const styles = {
@@ -34,6 +36,13 @@ let Basic = React.createClass({
         defaultDate={new Date(2015, 3, 1)}
         components={{
           dateCellInner:BackgroundInner,
+        }}
+        dayPropGetter={(date, isToday) => {
+          const day = (new Date(date)).getDay()
+          if (rDay.indexOf(day) !== -1) {
+            return { style: { backgroundColor: 'DarkGray' } }
+          }
+          return {}
         }}
       />
     )

@@ -4,6 +4,26 @@ import events from '../events';
 
 let allViews = Object.keys(BigCalendar.views).map(k => BigCalendar.views[k])
 
+const styles = {
+  cell: {
+    width: '100%',
+    height: '100%',
+    'textAlign': 'center',
+  }
+}
+class BackgroundInner extends React.Component {
+  render() {
+    const { value } = this.props
+    console.log(value)
+    return (
+      <div style={styles.cell}>
+        <div>50,000円</div>
+        <div>○</div>
+      </div>
+    )
+  }
+}
+
 let Basic = React.createClass({
   render(){
     return (
@@ -12,6 +32,9 @@ let Basic = React.createClass({
         events={events}
         views={allViews}
         defaultDate={new Date(2015, 3, 1)}
+        components={{
+          dateCellInner:BackgroundInner,
+        }}
       />
     )
   }

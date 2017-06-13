@@ -400,6 +400,7 @@ class Calendar extends React.Component {
      eventWrapper: elementType,
      dayWrapper: elementType,
      dateCellWrapper: elementType,
+     dateCellInner: elementType,
 
      toolbar: elementType,
 
@@ -514,7 +515,8 @@ class Calendar extends React.Component {
      {
        eventWrapper: EventWrapper,
        dayWrapper: BackgroundWrapper,
-       dateCellWrapper: BackgroundWrapper
+       dateCellWrapper: BackgroundWrapper,
+       dateCellInner: BackgroundWrapper
      }
    )
 

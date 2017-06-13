@@ -36,6 +36,7 @@ const propTypes = {
   endAccessor: accessor.isRequired,
 
   dateCellWrapper: elementType,
+  dateCellInner: elementType,
   eventComponent: elementType,
   eventWrapperComponent: elementType.isRequired,
   minRows: PropTypes.number.isRequired,
@@ -146,6 +147,7 @@ class DateContentRow extends React.Component {
       renderHeader,
       minRows, maxRows,
       dateCellWrapper,
+      dateCellInner,
       eventComponent,
       eventWrapperComponent,
       onSelectStart,
@@ -177,6 +179,7 @@ class DateContentRow extends React.Component {
           onSelectEnd={onSelectEnd}
           onSelectSlot={this.handleSelectSlot}
           cellWrapperComponent={dateCellWrapper}
+          cellInnerComponent={dateCellInner}
         />
 
         <div className='rbc-row-content'>

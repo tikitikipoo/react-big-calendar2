@@ -14,6 +14,8 @@ class BackgroundCells extends React.Component {
 
   static propTypes = {
     cellWrapperComponent: elementType,
+    cellInnerComponent: elementType,
+
     container: PropTypes.func,
     selectable: PropTypes.oneOf([true, false, 'ignoreEvents']),
 
@@ -54,7 +56,7 @@ class BackgroundCells extends React.Component {
   }
 
   render(){
-    let { range, cellWrapperComponent: Wrapper } = this.props;
+    let { range, cellWrapperComponent: Wrapper, cellInnerComponent: Inner } = this.props;
     let { selecting, startIdx, endIdx } = this.state;
 
     return (
@@ -74,7 +76,20 @@ class BackgroundCells extends React.Component {
                   selected && 'rbc-selected-cell',
                   dates.isToday(date) && 'rbc-today',
                 )}
-              />
+              >
+              {Inner
+                ? (
+                <Inner
+                  key={index}
+                  value={date}
+                  range={range}
+                >
+                  <span />
+                </Inner>
+                  )
+                : ''
+              }
+              </div>
             </Wrapper>
           )
         })}

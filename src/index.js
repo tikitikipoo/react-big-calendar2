@@ -20,7 +20,8 @@ Object.assign(Calendar, {
   components: {
     eventWrapper: EventWrapper,
     dayWrapper: BackgroundWrapper,
-    dateCellWrapper: BackgroundWrapper
+    dateCellWrapper: BackgroundWrapper,
+    dateCellInner: BackgroundWrapper
   }
 })
 
